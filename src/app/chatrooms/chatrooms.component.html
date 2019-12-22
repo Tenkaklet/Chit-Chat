@@ -1,0 +1,8 @@
+<div class="row">
+      <section class="available-chat-rooms col-md-6 offset-md-3">
+        <h4 class="text-center">Available Chatrooms</h4>
+        <div class="list-group">
+            <a  class="list-group-item list-group-item-action" *ngFor="let channel of channels" (click)="goToChannel(channel.name)">{{ channel.name }}</a>
+          </div>
+      </section>
+</div>

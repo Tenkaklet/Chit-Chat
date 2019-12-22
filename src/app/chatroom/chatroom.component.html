@@ -1,0 +1,30 @@
+<div *ngFor="let alert of alerts">
+  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+</div>
+<h2 class="text-center">{{ channelName }}</h2>
+
+<section class="container chat-boxes">
+  <div class="row">
+    <article class="col-8">
+      <ul class="list-group" *ngFor="let msgs of messages">
+        <li class="list-group-item active">{{ msgs.entry.sender }}</li>
+        <li class="list-group-item">{{ msgs.entry.text }}</li>
+      </ul>
+    </article>
+    <article class="col-4">
+      <h2 class="text-center">People here({{ numOfOccupants }})</h2>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let occupant of occupants">{{ occupant.uuid }}</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="container chat-input mt-2">
+  <form class="form-inline" (ngSubmit)="publishMsg()">
+    <div class="input-group mb-2 mr-2">
+      <input type="text" class="form-control-lg" [(ngModel)]="message" name="message" id="message-chat-input" placeholder="Message">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Send</button>
+  </form>
+</section>

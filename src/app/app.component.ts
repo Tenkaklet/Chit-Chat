@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'chitChat';
+  constructor( public afAuth: AngularFireAuth, private router: Router) {}
+
+  logout() {
+    this.afAuth.auth.signOut();
+    this.router.navigate(['/']);
+  }
+
 }
