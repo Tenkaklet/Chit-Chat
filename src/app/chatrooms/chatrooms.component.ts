@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ChatroomsComponent implements OnInit {
   channels = [
-    {name: 'General'},
+    {name: 'Common Room'},
     {name: 'Off Topic'},
     {name: 'Development'},
   ];

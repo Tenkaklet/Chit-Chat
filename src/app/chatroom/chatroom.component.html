@@ -6,10 +6,15 @@
 <section class="container chat-boxes">
   <div class="row">
     <article class="col-8">
-      <ul class="list-group" *ngFor="let msgs of messages">
-        <li class="list-group-item active">{{ msgs.entry.sender }}</li>
-        <li class="list-group-item">{{ msgs.entry.text }}</li>
-      </ul>
+      <div class="box" *ngFor="let msgs of messages">
+        <div class="media">
+          <img [src]="msgs.entry.sender.photoURL" class="align-self-center mr-3">
+          <div class="media-body">
+            <h5 class="mt-0"><strong>{{msgs.entry.sender.displayName}}</strong></h5>
+            <p>{{msgs.entry.text}}</p>
+          </div>
+        </div>
+      </div>
     </article>
     <article class="col-4">
       <h2 class="text-center">People here({{ numOfOccupants }})</h2>

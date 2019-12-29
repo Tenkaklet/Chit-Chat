@@ -13,7 +13,7 @@ export class ChatroomComponent implements OnInit {
 
   channel: any;
   channelName: '';
-  user: string;
+  user: {};
   leave: boolean;
   enter: boolean;
   alerts: any[];
@@ -26,8 +26,13 @@ export class ChatroomComponent implements OnInit {
 
 
   constructor(private aRoute: ActivatedRoute, private afAuth: AngularFireAuth, private pubnub: PubNubAngular) {
+
+  }
+
+  ngOnInit() {
     this.afAuth.authState.subscribe(user => {
-      this.user = user.displayName;
+      this.user = user;
+      console.log(user);
     });
     this.pubnub.init({
       publishKey: 'pub-c-e5e73710-65c9-4686-af6a-fe5afd373de3',
@@ -43,15 +48,12 @@ export class ChatroomComponent implements OnInit {
       withPresence: true,
       triggerEvents: ['message', 'presence', 'status']
     });
-  }
-
-  ngOnInit() {
     this.pubnub.getMessage(this.channelName, (msg) => {
       // console.log(msg); // this is the message history
       const newMessage = {
         entry: {
           sender: msg.message.sender,
-        text: msg.message.text
+          text: msg.message.text
         }
       };
       this.messages.push(newMessage);
@@ -86,9 +88,8 @@ export class ChatroomComponent implements OnInit {
       channel: this.channelName
     }, (status, res) => {
       if (status.error) {
-    } else {
-    }
-    })
+      }
+    });
 
   }
 
@@ -105,7 +106,7 @@ export class ChatroomComponent implements OnInit {
     // shows when people join or leave a channel
     this.pubnub.getPresence(this.channelName, (ps) => {
       console.log(ps);
-      if(ps.action === 'leave') {
+      if (ps.action === 'leave') {
         this.alerts = [{
           type: 'danger',
           msg: `${ps.uuid} has left the chat!`,
