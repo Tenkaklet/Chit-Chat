@@ -44,7 +44,8 @@ export class AuthenticateComponent implements OnInit {
       this.router.navigate(['chatrooms']);
       window.localStorage.setItem('user', this.username);
       user.user.updateProfile({
-        displayName: this.username
+        displayName: this.username,
+        photoURL: `https://api.adorable.io/avatars/285/${this.email}.png`
       })
       .catch(err => {
         console.log(err);

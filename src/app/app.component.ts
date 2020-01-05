@@ -8,7 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor( public afAuth: AngularFireAuth, private router: Router) {}
+  constructor( public afAuth: AngularFireAuth, private router: Router) {
+    this.afAuth.user.subscribe(user => {
+      console.log(user);
+    })
+  }
 
   logout() {
     this.afAuth.auth.signOut();
